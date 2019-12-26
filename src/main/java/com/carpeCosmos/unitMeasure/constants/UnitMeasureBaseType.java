@@ -49,7 +49,7 @@ public enum UnitMeasureBaseType implements UnitMeasureType {
 
     @Override
     public List<SimpleUnitMeasurement> getNumeratorSimpleUnitMeasurementList() {
-        return singletonList(new SimpleUnitMeasurement(UNO, this));
+        return singletonList(SimpleUnitMeasurement.newBuilder().unitPrefix(UNO).unitMeasureType(this).build());
     }
 
     @Override

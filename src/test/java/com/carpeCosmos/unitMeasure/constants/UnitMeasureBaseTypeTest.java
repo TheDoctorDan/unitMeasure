@@ -1,7 +1,5 @@
 package com.carpeCosmos.unitMeasure.constants;
 
-import com.carpeCosmos.unitMeasure.constants.UnitMeasureBaseType;
-import com.carpeCosmos.unitMeasure.constants.UnitMeasureType;
 import com.carpeCosmos.unitMeasure.domain.SimpleUnitMeasurement;
 import org.junit.Test;
 
@@ -10,7 +8,7 @@ import java.util.NoSuchElementException;
 
 import static com.carpeCosmos.unitMeasure.constants.FundamentalMeasurementType.*;
 import static com.carpeCosmos.unitMeasure.constants.UnitMeasureBaseType.*;
-import static com.carpeCosmos.unitMeasure.constants.UnitMeasureDerivedType.NEWTON;
+import static com.carpeCosmos.unitMeasure.constants.UnitPrefix.KILO;
 import static com.carpeCosmos.unitMeasure.constants.UnitPrefix.UNO;
 import static java.util.Collections.singletonList;
 import static org.junit.Assert.*;
@@ -29,7 +27,6 @@ public class UnitMeasureBaseTypeTest
         assertTrue(MOLE.isBaseUnitDimension());
         assertTrue(CANDELA.isBaseUnitDimension());
         assertTrue(EACH.isBaseUnitDimension());
-        assertFalse(NEWTON.isBaseUnitDimension());
     }
 
     @Test
@@ -74,35 +71,35 @@ public class UnitMeasureBaseTypeTest
     public void getNumeratorDimensionList()
     {
         assertArrayEquals(
-                singletonList(new SimpleUnitMeasurement(UNO, METER)).toArray(),
+                singletonList(SimpleUnitMeasurement.newBuilder().unitMeasureType(METER).build()).toArray(),
                 METER.getNumeratorSimpleUnitMeasurementList().toArray());
 
         assertArrayEquals(
-                singletonList(new SimpleUnitMeasurement(UNO, GRAM)).toArray(),
+                singletonList(SimpleUnitMeasurement.newBuilder().unitMeasureType(GRAM).build()).toArray(),
                 GRAM.getNumeratorSimpleUnitMeasurementList().toArray());
 
         assertArrayEquals(
-                singletonList(new SimpleUnitMeasurement(UNO, SECOND)).toArray(),
+                singletonList(SimpleUnitMeasurement.newBuilder().unitMeasureType(SECOND).build()).toArray(),
                 SECOND.getNumeratorSimpleUnitMeasurementList().toArray());
 
         assertArrayEquals(
-                singletonList(new SimpleUnitMeasurement(UNO, AMPERE)).toArray(),
+                singletonList(SimpleUnitMeasurement.newBuilder().unitMeasureType(AMPERE).build()).toArray(),
                 AMPERE.getNumeratorSimpleUnitMeasurementList().toArray());
 
         assertArrayEquals(
-                singletonList(new SimpleUnitMeasurement(UNO, KELVIN)).toArray(),
+                singletonList(SimpleUnitMeasurement.newBuilder().unitMeasureType(KELVIN).build()).toArray(),
                 KELVIN.getNumeratorSimpleUnitMeasurementList().toArray());
 
         assertArrayEquals(
-                singletonList(new SimpleUnitMeasurement(UNO, MOLE)).toArray(),
+                singletonList(SimpleUnitMeasurement.newBuilder().unitMeasureType(MOLE).build()).toArray(),
                 MOLE.getNumeratorSimpleUnitMeasurementList().toArray());
 
         assertArrayEquals(
-                singletonList(new SimpleUnitMeasurement(UNO, CANDELA)).toArray(),
+                singletonList(SimpleUnitMeasurement.newBuilder().unitMeasureType(CANDELA).build()).toArray(),
                 CANDELA.getNumeratorSimpleUnitMeasurementList().toArray());
 
         assertArrayEquals(
-                singletonList(new SimpleUnitMeasurement(UNO, EACH)).toArray(),
+                singletonList(SimpleUnitMeasurement.newBuilder().unitMeasureType(EACH).build()).toArray(),
                 EACH.getNumeratorSimpleUnitMeasurementList().toArray());
 
     }
@@ -119,4 +116,15 @@ public class UnitMeasureBaseTypeTest
                 EACH.getDenominatorSimpleUnitMeasurementList().toArray());
     }
 
+    @Test
+    public void getDefaultUnitPrefix() {
+        assertEquals(KILO, GRAM.getDefaultUnitPrefix());
+        assertEquals(UNO, METER.getDefaultUnitPrefix());
+        assertEquals(UNO, SECOND.getDefaultUnitPrefix());
+        assertEquals(UNO, AMPERE.getDefaultUnitPrefix());
+        assertEquals(UNO, KELVIN.getDefaultUnitPrefix());
+        assertEquals(UNO, MOLE.getDefaultUnitPrefix());
+        assertEquals(UNO, CANDELA.getDefaultUnitPrefix());
+        assertEquals(UNO, EACH.getDefaultUnitPrefix());
+    }
 }
