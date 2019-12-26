@@ -39,7 +39,7 @@ public enum UnitPrefix
 
 
     // find enum UnitPrefix by factor amount
-    public static UnitPrefix findByfactor(double factor) throws NoSuchElementException
+    public static UnitPrefix findByFactor(double factor) throws NoSuchElementException
     {
         for (UnitPrefix unitPrefix : values())
         {
