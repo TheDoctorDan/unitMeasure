@@ -18,36 +18,36 @@ public enum UnitMeasureDerivedType implements UnitMeasureType {
 
     NEWTON("n",
             Arrays.asList(
-                    new SimpleUnitMeasurement(KILO, GRAM),
-                    new SimpleUnitMeasurement(METER)
+                    SimpleUnitMeasurement.newBuilder().unitPrefix(KILO).unitMeasureType(GRAM).build(),
+                    SimpleUnitMeasurement.newBuilder().unitMeasureType(METER).build()
             ),
             Arrays.asList(
-                    new SimpleUnitMeasurement(SECOND),
-                    new SimpleUnitMeasurement(SECOND)
+                    SimpleUnitMeasurement.newBuilder().unitMeasureType(SECOND).build(),
+                    SimpleUnitMeasurement.newBuilder().unitMeasureType(SECOND).build()
             ),
             UNO),
 
     JOULE("J",
             Arrays.asList(
-                    new SimpleUnitMeasurement(NEWTON),
-                    new SimpleUnitMeasurement(METER)
+                    SimpleUnitMeasurement.newBuilder().unitMeasureType(NEWTON).build(),
+                    SimpleUnitMeasurement.newBuilder().unitMeasureType(METER).build()
             ),
             Collections.emptyList(),
             UNO),
 
     WATT("W",
             Arrays.asList(
-                    new SimpleUnitMeasurement(JOULE),
-                    new SimpleUnitMeasurement(METER)
+                    SimpleUnitMeasurement.newBuilder().unitMeasureType(JOULE).build(),
+                    SimpleUnitMeasurement.newBuilder().unitMeasureType(METER).build()
             ),
-            singletonList(new SimpleUnitMeasurement(SECOND)),
+            singletonList(SimpleUnitMeasurement.newBuilder().unitMeasureType(SECOND).build()),
             UNO),
 
     PASCAL("Pa",
-            singletonList(new SimpleUnitMeasurement(NEWTON)),
+            singletonList(SimpleUnitMeasurement.newBuilder().unitMeasureType(NEWTON).build()),
             Arrays.asList(
-                    new SimpleUnitMeasurement(METER),
-                    new SimpleUnitMeasurement(METER)
+                    SimpleUnitMeasurement.newBuilder().unitMeasureType(METER).build(),
+                    SimpleUnitMeasurement.newBuilder().unitMeasureType(METER).build()
             ),
             UNO),
 
@@ -74,8 +74,8 @@ public enum UnitMeasureDerivedType implements UnitMeasureType {
 
     UnitMeasureDerivedType(String symbol, UnitMeasureType numeratorUnitMeasureType, UnitMeasureType denominatorUnitMeasureType, UnitPrefix defaultUnitPrefix) {
         this.symbol = symbol;
-        this.numeratorSimpleUnitMeasurementList = singletonList(new SimpleUnitMeasurement(numeratorUnitMeasureType));
-        this.denominatorSimpleUnitMeasurementList = singletonList(new SimpleUnitMeasurement(denominatorUnitMeasureType));
+        this.numeratorSimpleUnitMeasurementList = singletonList(SimpleUnitMeasurement.newBuilder().unitMeasureType(numeratorUnitMeasureType).build());
+        this.denominatorSimpleUnitMeasurementList = singletonList(SimpleUnitMeasurement.newBuilder().unitMeasureType(denominatorUnitMeasureType).build());
         this.defaultUnitPrefix = defaultUnitPrefix;
     }
 
