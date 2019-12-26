@@ -1,6 +1,5 @@
 package com.carpeCosmos.unitMeasure.constants;
 
-import com.carpeCosmos.unitMeasure.constants.UnitPrefix;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
@@ -12,38 +11,38 @@ public class UnitPrefixTest
 {
 
     @Test
-    public void findByfactorTestNormalSet()
+    public void findByFactorTestNormalSet()
     {
         UnitPrefix actualUnitPrefix;
 
-        actualUnitPrefix = UnitPrefix.findByfactor(1D);
+        actualUnitPrefix = UnitPrefix.findByFactor(1D);
         assertEquals(UNO, actualUnitPrefix);
 
-        actualUnitPrefix = UnitPrefix.findByfactor(10D);
+        actualUnitPrefix = UnitPrefix.findByFactor(10D);
         assertEquals(DECA, actualUnitPrefix);
 
-        actualUnitPrefix = UnitPrefix.findByfactor(.1D);
+        actualUnitPrefix = UnitPrefix.findByFactor(.1D);
         assertEquals(DECI, actualUnitPrefix);
 
-        actualUnitPrefix = UnitPrefix.findByfactor(1000D);
+        actualUnitPrefix = UnitPrefix.findByFactor(1000D);
         assertEquals(KILO, actualUnitPrefix);
 
-        actualUnitPrefix = UnitPrefix.findByfactor(.001D);
+        actualUnitPrefix = UnitPrefix.findByFactor(.001D);
         assertEquals(MILLI, actualUnitPrefix);
 
 
-        actualUnitPrefix = UnitPrefix.findByfactor(1.0E+24D);
+        actualUnitPrefix = UnitPrefix.findByFactor(1.0E+24D);
         assertEquals(YOTTA, actualUnitPrefix);
 
-        actualUnitPrefix = UnitPrefix.findByfactor(1.0E-24D);
+        actualUnitPrefix = UnitPrefix.findByFactor(1.0E-24D);
         assertEquals(YOCTO, actualUnitPrefix);
 
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void findByfactorTestFailure()
+    public void findByFactorTestFailure()
     {
-        UnitPrefix.findByfactor(1110D);
+        UnitPrefix.findByFactor(1110D);
     }
 
 
@@ -154,5 +153,54 @@ public class UnitPrefixTest
         DECI.subtractUnitPrefixes(KILO);
     }
 
+    @Test
+    public void differenceInPowerOf10() {
+        assertEquals(-24, UNO.differenceInPowerOf10(YOTTA));
+        assertEquals(-21, UNO.differenceInPowerOf10(ZETTA));
+        assertEquals(-18, UNO.differenceInPowerOf10(EXA));
+        assertEquals(-15, UNO.differenceInPowerOf10(PETA));
+        assertEquals(-12, UNO.differenceInPowerOf10(TERA));
+        assertEquals(-9, UNO.differenceInPowerOf10(GIGA));
+        assertEquals(-6, UNO.differenceInPowerOf10(MEGA));
+        assertEquals(-3, UNO.differenceInPowerOf10(KILO));
+        assertEquals(-2, UNO.differenceInPowerOf10(HECTO));
+        assertEquals(-1, UNO.differenceInPowerOf10(DECA));
+        assertEquals(0, UNO.differenceInPowerOf10(UNO));
+        assertEquals(1, UNO.differenceInPowerOf10(DECI));
+        assertEquals(2, UNO.differenceInPowerOf10(CENTI));
+        assertEquals(3, UNO.differenceInPowerOf10(MILLI));
+        assertEquals(6, UNO.differenceInPowerOf10(MICRO));
+        assertEquals(9, UNO.differenceInPowerOf10(NANO));
+        assertEquals(12, UNO.differenceInPowerOf10(PICO));
+        assertEquals(15, UNO.differenceInPowerOf10(FEMTO));
+        assertEquals(18, UNO.differenceInPowerOf10(ATTO));
+        assertEquals(21, UNO.differenceInPowerOf10(ZEPTO));
+        assertEquals(24, UNO.differenceInPowerOf10(YOCTO));
+    }
+
+    @Test
+    public void getFactor() {
+        assertEquals(1000., KILO.getFactor(), 0.0000001);
+    }
+
+    @Test
+    public void getPowerOf10() {
+        assertEquals(3, KILO.getPowerOf10());
+    }
+
+    @Test
+    public void getInWords() {
+        assertEquals("thousand", KILO.getInWords());
+    }
+
+    @Test
+    public void getPrefixText() {
+        assertEquals("kilo-", KILO.getPrefixText());
+    }
+
+    @Test
+    public void getSymbol() {
+        assertEquals("k", KILO.getSymbol());
+    }
 
 }
