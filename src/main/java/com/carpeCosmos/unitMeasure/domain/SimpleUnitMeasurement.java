@@ -2,48 +2,35 @@ package com.carpeCosmos.unitMeasure.domain;
 
 import com.carpeCosmos.unitMeasure.constants.UnitMeasureType;
 import com.carpeCosmos.unitMeasure.constants.UnitPrefix;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 
 import java.util.NoSuchElementException;
-import java.util.Objects;
+
+import static com.carpeCosmos.unitMeasure.constants.UnitPrefix.UNO;
 
 @Getter
-@AllArgsConstructor
+@Builder(builderMethodName = "newBuilder")
+@EqualsAndHashCode
 public class SimpleUnitMeasurement
 {
-    private UnitPrefix unitPrefix;
+    @Builder.Default
+    private UnitPrefix unitPrefix = UNO;
+    @NonNull
     private UnitMeasureType unitMeasureType;
 
 
-    // constructor, assume uno
-    public SimpleUnitMeasurement(UnitMeasureType unitMeasureType)
-    {
-        this.unitPrefix = UnitPrefix.UNO;
-        this.unitMeasureType = unitMeasureType;
-    }
 
     public SimpleUnitMeasurement addPowerOf10ToUnitMeasurementPrefix(int powerOf10) throws NoSuchElementException
     {
         if(powerOf10==0)
             return this;
         UnitPrefix unitPrefixForSumPowerOf10 = this.getUnitPrefix().addPowerOf10(powerOf10);
-        return new SimpleUnitMeasurement(unitPrefixForSumPowerOf10, this.unitMeasureType);
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) return true;
-        if (!(o instanceof SimpleUnitMeasurement)) return false;
-        SimpleUnitMeasurement that = (SimpleUnitMeasurement) o;
-        return getUnitPrefix() == that.getUnitPrefix() &&
-                Objects.equals(getUnitMeasureType(), that.getUnitMeasureType());
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(getUnitPrefix(), getUnitMeasureType());
+        return SimpleUnitMeasurement.newBuilder()
+                .unitPrefix(unitPrefixForSumPowerOf10)
+                .unitMeasureType((this.unitMeasureType))
+                .build();
     }
 }
