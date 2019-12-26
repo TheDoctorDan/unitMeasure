@@ -127,4 +127,16 @@ public class UnitMeasureBaseTypeTest
         assertEquals(UNO, CANDELA.getDefaultUnitPrefix());
         assertEquals(UNO, EACH.getDefaultUnitPrefix());
     }
+
+    @Test
+    public void getFundamentalMeasurementType() {
+        assertEquals(MASS, GRAM.getFundamentalMeasurementType());
+        assertEquals(LENGTH, METER.getFundamentalMeasurementType());
+        assertEquals(TIME, SECOND.getFundamentalMeasurementType());
+        assertEquals(ELECTRICAL_CURRENT, AMPERE.getFundamentalMeasurementType());
+        assertEquals(TEMPERATURE, KELVIN.getFundamentalMeasurementType());
+        assertEquals(AMOUNT_OF_SUBSTANCE, MOLE.getFundamentalMeasurementType());
+        assertEquals(LUMINOUS_INTENSITY, CANDELA.getFundamentalMeasurementType());
+        assertEquals(UNIT_LESS_NUMBER, EACH.getFundamentalMeasurementType());
+    }
 }
