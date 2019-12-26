@@ -1,15 +1,15 @@
-package com.carpeCosmos.unitMeasure.domain;
+package com.carpeCosmos.unitMeasure.constants;
 
+import com.carpeCosmos.unitMeasure.domain.SimpleUnitMeasurement;
 import lombok.Getter;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static com.carpeCosmos.unitMeasure.domain.FundamentalMeasurementType.*;
-import static com.carpeCosmos.unitMeasure.domain.UnitPrefix.KILO;
-import static com.carpeCosmos.unitMeasure.domain.UnitPrefix.UNO;
-import static java.util.Arrays.asList;
+import static com.carpeCosmos.unitMeasure.constants.FundamentalMeasurementType.*;
+import static com.carpeCosmos.unitMeasure.constants.UnitPrefix.KILO;
+import static com.carpeCosmos.unitMeasure.constants.UnitPrefix.UNO;
 import static java.util.Collections.singletonList;
 
 @Getter

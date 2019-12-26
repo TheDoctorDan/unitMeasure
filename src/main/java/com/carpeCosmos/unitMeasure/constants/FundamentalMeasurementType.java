@@ -1,4 +1,4 @@
-package com.carpeCosmos.unitMeasure.domain;
+package com.carpeCosmos.unitMeasure.constants;
 
 public enum FundamentalMeasurementType
 {

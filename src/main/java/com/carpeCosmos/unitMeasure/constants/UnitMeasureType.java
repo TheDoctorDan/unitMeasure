@@ -1,4 +1,6 @@
-package com.carpeCosmos.unitMeasure.domain;
+package com.carpeCosmos.unitMeasure.constants;
+
+import com.carpeCosmos.unitMeasure.domain.SimpleUnitMeasurement;
 
 import java.util.List;
 import java.util.NoSuchElementException;
