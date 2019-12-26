@@ -1,5 +1,7 @@
 package com.carpeCosmos.unitMeasure.domain;
 
+import com.carpeCosmos.unitMeasure.constants.UnitMeasureType;
+import com.carpeCosmos.unitMeasure.constants.UnitPrefix;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

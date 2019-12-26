@@ -1,13 +1,14 @@
 package com.carpeCosmos.unitMeasure.domain;
 
+import com.carpeCosmos.unitMeasure.constants.UnitPrefix;
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static com.carpeCosmos.unitMeasure.domain.UnitMeasureBaseType.EACH;
-import static com.carpeCosmos.unitMeasure.domain.UnitPrefix.UNO;
+import static com.carpeCosmos.unitMeasure.constants.UnitMeasureBaseType.EACH;
+import static com.carpeCosmos.unitMeasure.constants.UnitPrefix.UNO;
 
 @Getter
 public class UnitMeasurementFraction {
