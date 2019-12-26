@@ -1,16 +1,17 @@
-package com.carpeCosmos.unitMeasure.domain;
+package com.carpeCosmos.unitMeasure.constants;
 
-import org.junit.Before;
+import com.carpeCosmos.unitMeasure.constants.UnitMeasureBaseType;
+import com.carpeCosmos.unitMeasure.constants.UnitMeasureType;
+import com.carpeCosmos.unitMeasure.domain.SimpleUnitMeasurement;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.NoSuchElementException;
 
-import static com.carpeCosmos.unitMeasure.domain.FundamentalMeasurementType.*;
-import static com.carpeCosmos.unitMeasure.domain.UnitMeasureBaseType.*;
-import static com.carpeCosmos.unitMeasure.domain.UnitMeasureDerivedType.NEWTON;
-import static com.carpeCosmos.unitMeasure.domain.UnitPrefix.UNO;
+import static com.carpeCosmos.unitMeasure.constants.FundamentalMeasurementType.*;
+import static com.carpeCosmos.unitMeasure.constants.UnitMeasureBaseType.*;
+import static com.carpeCosmos.unitMeasure.constants.UnitMeasureDerivedType.NEWTON;
+import static com.carpeCosmos.unitMeasure.constants.UnitPrefix.UNO;
 import static java.util.Collections.singletonList;
 import static org.junit.Assert.*;
 
