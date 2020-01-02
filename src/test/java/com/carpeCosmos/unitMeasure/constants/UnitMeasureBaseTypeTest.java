@@ -1,7 +1,7 @@
 package com.carpeCosmos.unitMeasure.constants;
 
 import com.carpeCosmos.unitMeasure.domain.SimpleUnitMeasurement;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.NoSuchElementException;
@@ -11,14 +11,14 @@ import static com.carpeCosmos.unitMeasure.constants.UnitMeasureBaseType.*;
 import static com.carpeCosmos.unitMeasure.constants.UnitPrefix.KILO;
 import static com.carpeCosmos.unitMeasure.constants.UnitPrefix.UNO;
 import static java.util.Collections.singletonList;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class UnitMeasureBaseTypeTest
-{
+
+public class UnitMeasureBaseTypeTest {
+
 
     @Test
-    public void isBaseUnitDimensionTest()
-    {
+    public void isBaseUnitDimensionTest() {
         assertTrue(METER.isBaseUnitDimension());
         assertTrue(GRAM.isBaseUnitDimension());
         assertTrue(SECOND.isBaseUnitDimension());
@@ -30,8 +30,7 @@ public class UnitMeasureBaseTypeTest
     }
 
     @Test
-    public void findBySymbolTestNormalSet()
-    {
+    public void findBySymbolTestNormalSet() {
         assertEquals(METER, UnitMeasureType.findBySymbol(UnitMeasureBaseType.class, "m"));
         assertEquals(GRAM, UnitMeasureType.findBySymbol(UnitMeasureBaseType.class, "g"));
         assertEquals(SECOND, UnitMeasureType.findBySymbol(UnitMeasureBaseType.class, "s"));
@@ -42,15 +41,15 @@ public class UnitMeasureBaseTypeTest
         assertEquals(EACH, UnitMeasureType.findBySymbol(UnitMeasureBaseType.class, "ea"));
     }
 
-    @Test(expected = NoSuchElementException.class)
-    public void findBySymbolTestFailure()
-    {
-        UnitMeasureType.findBySymbol(UnitMeasureBaseType.class, "z");
+    @Test
+    public void findBySymbolTestFailure() {
+        Throwable thrown = assertThrows(NoSuchElementException.class, () ->
+                UnitMeasureType.findBySymbol(UnitMeasureBaseType.class, "z"));
+        assertEquals("No UnitMeasureBaseType Enum with symbol of z.", thrown.getMessage());
     }
 
     @Test
-    public void findByFundamentalMeasurementTypeTestNormalSet()
-    {
+    public void findByFundamentalMeasurementTypeTestNormalSet() {
         assertEquals(METER, UnitMeasureBaseType.findByFundamentalMeasurementType(LENGTH));
         assertEquals(GRAM, UnitMeasureBaseType.findByFundamentalMeasurementType(MASS));
         assertEquals(SECOND, UnitMeasureBaseType.findByFundamentalMeasurementType(TIME));
@@ -61,15 +60,15 @@ public class UnitMeasureBaseTypeTest
         assertEquals(EACH, UnitMeasureBaseType.findByFundamentalMeasurementType(UNIT_LESS_NUMBER));
     }
 
-    @Test(expected = NoSuchElementException.class)
-    public void findByFundamentalMeasurementTypeTestFailure()
-    {
-        UnitMeasureBaseType.findByFundamentalMeasurementType(null);
+    @Test
+    public void findByFundamentalMeasurementTypeTestFailure() {
+        Throwable thrown = assertThrows(NoSuchElementException.class, () ->
+                UnitMeasureBaseType.findByFundamentalMeasurementType(null));
+        assertEquals("No UnitMeasureBaseType Enum with fundamentalMeasurementType of null.", thrown.getMessage());
     }
 
     @Test
-    public void getNumeratorDimensionList()
-    {
+    public void getNumeratorDimensionList() {
         assertArrayEquals(
                 singletonList(SimpleUnitMeasurement.newBuilder().unitMeasureType(METER).build()).toArray(),
                 METER.getNumeratorSimpleUnitMeasurementList().toArray());
@@ -105,8 +104,7 @@ public class UnitMeasureBaseTypeTest
     }
 
     @Test
-    public void getDenominatorDimensionList()
-    {
+    public void getDenominatorDimensionList() {
         assertArrayEquals(
                 Collections.emptyList().toArray(),
                 METER.getDenominatorSimpleUnitMeasurementList().toArray());

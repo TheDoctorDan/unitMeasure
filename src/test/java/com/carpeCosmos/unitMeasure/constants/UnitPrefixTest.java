@@ -1,18 +1,17 @@
 package com.carpeCosmos.unitMeasure.constants;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
 
 import static com.carpeCosmos.unitMeasure.constants.UnitPrefix.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class UnitPrefixTest
-{
+public class UnitPrefixTest {
 
     @Test
-    public void findByFactorTestNormalSet()
-    {
+    public void findByFactorTestNormalSet() {
         UnitPrefix actualUnitPrefix;
 
         actualUnitPrefix = UnitPrefix.findByFactor(1D);
@@ -39,16 +38,16 @@ public class UnitPrefixTest
 
     }
 
-    @Test(expected = NoSuchElementException.class)
-    public void findByFactorTestFailure()
-    {
-        UnitPrefix.findByFactor(1110D);
+    @Test
+    public void findByFactorTestFailure() {
+        Throwable thrown = assertThrows(NoSuchElementException.class, () ->
+                UnitPrefix.findByFactor(1110D));
+        assertEquals("No UnitPrefix Enum with factor of 1110.0.", thrown.getMessage());
     }
 
 
     @Test
-    public void findByPowerOf10TestNormalSet()
-    {
+    public void findByPowerOf10TestNormalSet() {
         UnitPrefix actualUnitPrefix;
 
         actualUnitPrefix = UnitPrefix.findByPowerOf10(0);
@@ -76,15 +75,15 @@ public class UnitPrefixTest
     }
 
 
-    @Test(expected = NoSuchElementException.class)
-    public void findByPowerOf10TestFailure()
-    {
-        UnitPrefix.findByPowerOf10(4);
+    @Test
+    public void findByPowerOf10TestFailure() {
+        Throwable thrown = assertThrows(NoSuchElementException.class, () ->
+                UnitPrefix.findByPowerOf10(4));
+        assertEquals("No UnitPrefix Enum with power of 10 to the 4.", thrown.getMessage());
     }
 
     @Test
-    public void addPowerOf10TestNormalSet()
-    {
+    public void addPowerOf10TestNormalSet() {
         assertEquals(UNO, UNO.addPowerOf10(0));
         assertEquals(DECA, UNO.addPowerOf10(1));
         assertEquals(HECTO, UNO.addPowerOf10(2));
@@ -102,55 +101,64 @@ public class UnitPrefixTest
         assertEquals(MICRO, MILLI.addPowerOf10(-3));
     }
 
-    @Test(expected = NoSuchElementException.class)
-    public void addPowerOf10TestNoPower4() { UNO.addPowerOf10(4); }
+    @Test
+    public void addPowerOf10TestNoPower4() {
+        Throwable thrown = assertThrows(NoSuchElementException.class, () ->
+                UNO.addPowerOf10(4));
+        assertEquals("No UnitPrefix Enum with power of 10 to the 4.", thrown.getMessage());
+    }
 
-
-    @Test(expected = NoSuchElementException.class)
-    public void addPowerOf10TestNoPower8() { MEGA.addPowerOf10(2); }
 
     @Test
-    public void sumUnitPrefixesTestNormalSet()
-    {
+    public void addPowerOf10TestNoPower8() {
+        Throwable thrown = assertThrows(NoSuchElementException.class, () ->
+                MEGA.addPowerOf10(2));
+        assertEquals("No UnitPrefix Enum with power of 10 to the 8.", thrown.getMessage());
+    }
+
+    @Test
+    public void sumUnitPrefixesTestNormalSet() {
         assertEquals(MEGA, KILO.sumUnitPrefixes(KILO));
         assertEquals(TERA, GIGA.sumUnitPrefixes(KILO));
         assertEquals(KILO, GIGA.sumUnitPrefixes(MICRO));
     }
 
-    @Test(expected = NoSuchElementException.class)
-    public void sumUnitPrefixesTestOutOfRange()
-    {
-        PETA.sumUnitPrefixes(PETA);
+    @Test
+    public void sumUnitPrefixesTestOutOfRange() {
+        Throwable thrown = assertThrows(NoSuchElementException.class, () ->
+                PETA.sumUnitPrefixes(PETA));
+        assertEquals("No UnitPrefix Enum with power of 10 to the 30.", thrown.getMessage());
     }
-
-
-    @Test(expected = NoSuchElementException.class)
-    public void sumUnitPrefixesTestNotMultipleOf1000()
-    {
-        DECA.sumUnitPrefixes(KILO);
-    }
-
 
 
     @Test
-    public void subtractUnitPrefixesTestNormalSet()
-    {
+    public void sumUnitPrefixesTestNotMultipleOf1000() {
+        Throwable thrown = assertThrows(NoSuchElementException.class, () ->
+                DECA.sumUnitPrefixes(KILO));
+        assertEquals("No UnitPrefix Enum with power of 10 to the 4.", thrown.getMessage());
+    }
+
+
+    @Test
+    public void subtractUnitPrefixesTestNormalSet() {
         assertEquals(KILO, MEGA.subtractUnitPrefixes(KILO));
         assertEquals(MEGA, GIGA.subtractUnitPrefixes(KILO));
         assertEquals(PETA, GIGA.subtractUnitPrefixes(MICRO));
     }
 
-    @Test(expected = NoSuchElementException.class)
-    public void subtractUnitPrefixesTestOutOfRange()
-    {
-        FEMTO.subtractUnitPrefixes(PETA);
+    @Test
+    public void subtractUnitPrefixesTestOutOfRange() {
+        Throwable thrown = assertThrows(NoSuchElementException.class, () ->
+                FEMTO.subtractUnitPrefixes(PETA));
+        assertEquals("No UnitPrefix Enum with power of 10 to the -30.", thrown.getMessage());
     }
 
 
-    @Test(expected = NoSuchElementException.class)
-    public void subtractUnitPrefixesTestNotMultipleOf1000()
-    {
-        DECI.subtractUnitPrefixes(KILO);
+    @Test
+    public void subtractUnitPrefixesTestNotMultipleOf1000() {
+        Throwable thrown = assertThrows(NoSuchElementException.class, () ->
+                DECI.subtractUnitPrefixes(KILO));
+        assertEquals("No UnitPrefix Enum with power of 10 to the -4.", thrown.getMessage());
     }
 
     @Test
