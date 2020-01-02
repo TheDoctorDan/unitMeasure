@@ -1,12 +1,10 @@
 package com.carpeCosmos.unitMeasure.constants;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.NoSuchElementException;
 
 @Getter
-@AllArgsConstructor
 public enum UnitPrefix
 {
     YOTTA(1.0E+24, 24, "septillion", "yotta-", "Y"),
@@ -37,6 +35,13 @@ public enum UnitPrefix
     private String prefixText;
     private String symbol;
 
+    UnitPrefix(double factor, int powerOf10, String inWords, String prefixText, String symbol) {
+        this.factor = factor;
+        this.powerOf10 = powerOf10;
+        this.inWords = inWords;
+        this.prefixText = prefixText;
+        this.symbol = symbol;
+    }
 
     // find enum UnitPrefix by factor amount
     public static UnitPrefix findByFactor(double factor) throws NoSuchElementException
@@ -62,7 +67,7 @@ public enum UnitPrefix
                 return unitPrefix;
             }
         }
-        throw new NoSuchElementException("No UnitPrefix Enum with power of 10 of " + powerOf10 + ".");
+        throw new NoSuchElementException("No UnitPrefix Enum with power of 10 to the " + powerOf10 + ".");
     }
 
 
