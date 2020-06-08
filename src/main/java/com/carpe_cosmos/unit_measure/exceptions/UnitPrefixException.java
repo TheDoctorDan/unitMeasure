@@ -1,4 +1,4 @@
-package com.carpeCosmos.unitMeasure.exceptions;
+package com.carpe_cosmos.unit_measure.exceptions;
 
 public class UnitPrefixException extends Exception {
     public UnitPrefixException() {
