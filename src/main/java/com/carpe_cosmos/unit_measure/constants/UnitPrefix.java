@@ -1,12 +1,10 @@
-package com.carpeCosmos.unitMeasure.constants;
+package com.carpe_cosmos.unit_measure.constants;
 
+import com.carpe_cosmos.unit_measure.exceptions.UnitPrefixException;
 import lombok.Getter;
 
-import java.util.NoSuchElementException;
-
 @Getter
-public enum UnitPrefix
-{
+public enum UnitPrefix {
     YOTTA(1.0E+24, 24, "septillion", "yotta-", "Y"),
     ZETTA(1.0E+21, 21, "sextillion", "zetta-", "Z"),
     EXA(1.0E+18, 18, "quintillion", "exa-", "E"),
@@ -44,60 +42,50 @@ public enum UnitPrefix
     }
 
     // find enum UnitPrefix by factor amount
-    public static UnitPrefix findByFactor(double factor) throws NoSuchElementException
-    {
-        for (UnitPrefix unitPrefix : values())
-        {
-            if (unitPrefix.factor == factor)
-            {
+    public static UnitPrefix findByFactor(double factor) throws UnitPrefixException {
+        for (UnitPrefix unitPrefix : values()) {
+            if (unitPrefix.factor == factor) {
                 return unitPrefix;
             }
         }
-        throw new NoSuchElementException("No UnitPrefix Enum with factor of " + factor + ".");
+        throw new UnitPrefixException("No UnitPrefix Enum with factor of " + factor + ".");
     }
 
 
     // find enum UnitPrefix by power of 10 amount
-    public static UnitPrefix findByPowerOf10(int powerOf10) throws NoSuchElementException
-    {
-        for (UnitPrefix unitPrefix : values())
-        {
-            if (unitPrefix.powerOf10 == powerOf10)
-            {
+    public static UnitPrefix findByPowerOf10(int powerOf10) throws UnitPrefixException {
+        for (UnitPrefix unitPrefix : values()) {
+            if (unitPrefix.powerOf10 == powerOf10) {
                 return unitPrefix;
             }
         }
-        throw new NoSuchElementException("No UnitPrefix Enum with power of 10 to the " + powerOf10 + ".");
+        throw new UnitPrefixException("No UnitPrefix Enum with power of 10 to the " + powerOf10 + ".");
     }
 
 
     // add power of 10 value and get resulting UnitPrefix
-    public UnitPrefix addPowerOf10(int powerOf10) throws NoSuchElementException
-    {
+    public UnitPrefix addPowerOf10(int powerOf10) throws UnitPrefixException {
         int sumPowerOf10 = this.powerOf10 + powerOf10;
         return findByPowerOf10(sumPowerOf10);
     }
 
 
     // sum power of 10 of this UnitPrefix and passed UnitPrefix and get the resulting UnitPrefix
-    public UnitPrefix sumUnitPrefixes(UnitPrefix unitPrefix) throws NoSuchElementException
-    {
-        int powerOf10 = this.powerOf10 + unitPrefix.powerOf10;
-        return findByPowerOf10(powerOf10);
+    public UnitPrefix sumUnitPrefixes(UnitPrefix unitPrefix) throws UnitPrefixException {
+        int sumPowerOf10 = this.powerOf10 + unitPrefix.powerOf10;
+        return findByPowerOf10(sumPowerOf10);
     }
 
 
     // subtract passed UnitPrefix from this UnitPrefix and get the resulting UnitPrefix
-    public UnitPrefix subtractUnitPrefixes(UnitPrefix unitPrefix) throws NoSuchElementException
-    {
-        int powerOf10 = this.powerOf10 - unitPrefix.powerOf10;
-        return findByPowerOf10(powerOf10);
+    public UnitPrefix subtractUnitPrefixes(UnitPrefix unitPrefix) throws UnitPrefixException {
+        int differencePowerOf10 = this.powerOf10 - unitPrefix.powerOf10;
+        return findByPowerOf10(differencePowerOf10);
     }
 
 
     // subtract passed UnitPrefix from this UnitPrefix and return the resulting power of 10
-    public int differenceInPowerOf10(UnitPrefix other)
-    {
+    public int differenceInPowerOf10(UnitPrefix other) {
         return this.powerOf10 - other.powerOf10;
     }
 
