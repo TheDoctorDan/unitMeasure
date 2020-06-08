@@ -8,8 +8,6 @@ import java.util.List;
 public interface UnitMeasureType {
 
 
-    String name();
-
     String getSymbol();
 
     boolean isBaseUnitDimension();
