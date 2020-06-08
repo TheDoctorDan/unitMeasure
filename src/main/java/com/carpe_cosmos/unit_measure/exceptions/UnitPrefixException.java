@@ -1,8 +1,6 @@
 package com.carpe_cosmos.unit_measure.exceptions;
 
 public class UnitPrefixException extends Exception {
-    public UnitPrefixException() {
-    }
 
     public UnitPrefixException(String message) {
         super(message);

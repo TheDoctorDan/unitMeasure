@@ -1,8 +1,6 @@
 package com.carpe_cosmos.unit_measure.exceptions;
 
 public class UnitMeasureException extends Exception {
-    public UnitMeasureException() {
-    }
 
     public UnitMeasureException(String message) {
         super(message);
