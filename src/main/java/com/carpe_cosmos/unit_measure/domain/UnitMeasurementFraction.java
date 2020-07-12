@@ -34,8 +34,8 @@ public class UnitMeasurementFraction {
 
     public Builder toBuilder() {
         Builder builder = new Builder();
-        builder = builder.denominatorSimpleUnitMeasurementList(this.denominatorSimpleUnitMeasurementList);
-        builder = builder.numeratorSimpleUnitMeasurementList(this.numeratorSimpleUnitMeasurementList);
+        builder.denominatorSimpleUnitMeasurementList(this.denominatorSimpleUnitMeasurementList);
+        builder.numeratorSimpleUnitMeasurementList(this.numeratorSimpleUnitMeasurementList);
         return builder;
     }
 
@@ -154,8 +154,8 @@ public class UnitMeasurementFraction {
     }
 
     public static final class Builder {
-        private List<SimpleUnitMeasurement> numeratorSimpleUnitMeasurementList;
-        private List<SimpleUnitMeasurement> denominatorSimpleUnitMeasurementList;
+        private final List<SimpleUnitMeasurement> numeratorSimpleUnitMeasurementList;
+        private final List<SimpleUnitMeasurement> denominatorSimpleUnitMeasurementList;
 
         public Builder() {
             this.numeratorSimpleUnitMeasurementList = new ArrayList<>();
