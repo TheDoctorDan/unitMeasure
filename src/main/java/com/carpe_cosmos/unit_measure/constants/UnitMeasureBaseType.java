@@ -58,9 +58,10 @@ public enum UnitMeasureBaseType implements UnitMeasureType {
     }
 
 
-    public static UnitMeasureBaseType findByFundamentalMeasurementType(FundamentalMeasurementType fundamentalMeasurementType) throws UnitMeasureException {
+    public static UnitMeasureBaseType findByFundamentalMeasurementType(FundamentalMeasurementType fundamentalMeasurementType, MeasurementSystem measurementSystem) throws UnitMeasureException {
         for (UnitMeasureBaseType unitMeasureBaseType : values()) {
-            if (unitMeasureBaseType.fundamentalMeasurementType.equals(fundamentalMeasurementType))
+            if (unitMeasureBaseType.fundamentalMeasurementType.equals(fundamentalMeasurementType) &&
+                    unitMeasureBaseType.measurementSystem.equals(measurementSystem))
                 return unitMeasureBaseType;
         }
         throw new UnitMeasureException("No UnitMeasureBaseType Enum with fundamentalMeasurementType of " + fundamentalMeasurementType + ".");
