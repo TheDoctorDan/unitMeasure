@@ -14,14 +14,19 @@ import static com.carpe_cosmos.unit_measure.constants.FundamentalMeasurementType
 import static com.carpe_cosmos.unit_measure.constants.FundamentalMeasurementType.TEMPERATURE;
 import static com.carpe_cosmos.unit_measure.constants.FundamentalMeasurementType.TIME;
 import static com.carpe_cosmos.unit_measure.constants.FundamentalMeasurementType.UNIT_LESS_NUMBER;
+import static com.carpe_cosmos.unit_measure.constants.MeasurementSystem.IMPERIAL;
+import static com.carpe_cosmos.unit_measure.constants.MeasurementSystem.SYSTEM_INTERNATIONAL;
 import static com.carpe_cosmos.unit_measure.constants.UnitMeasureBaseType.AMPERE;
 import static com.carpe_cosmos.unit_measure.constants.UnitMeasureBaseType.CANDELA;
 import static com.carpe_cosmos.unit_measure.constants.UnitMeasureBaseType.EACH;
+import static com.carpe_cosmos.unit_measure.constants.UnitMeasureBaseType.FOOT;
 import static com.carpe_cosmos.unit_measure.constants.UnitMeasureBaseType.GRAM;
 import static com.carpe_cosmos.unit_measure.constants.UnitMeasureBaseType.KELVIN;
 import static com.carpe_cosmos.unit_measure.constants.UnitMeasureBaseType.METER;
 import static com.carpe_cosmos.unit_measure.constants.UnitMeasureBaseType.MOLE;
+import static com.carpe_cosmos.unit_measure.constants.UnitMeasureBaseType.RANKINE;
 import static com.carpe_cosmos.unit_measure.constants.UnitMeasureBaseType.SECOND;
+import static com.carpe_cosmos.unit_measure.constants.UnitMeasureBaseType.SLUG;
 import static com.carpe_cosmos.unit_measure.constants.UnitMeasureBaseType.findByFundamentalMeasurementType;
 import static com.carpe_cosmos.unit_measure.constants.UnitMeasureType.findBySymbol;
 import static java.util.Collections.singletonList;
@@ -161,5 +166,23 @@ public class UnitMeasureBaseTypeTest {
         assertEquals(AMOUNT_OF_SUBSTANCE, MOLE.getFundamentalMeasurementType());
         assertEquals(LUMINOUS_INTENSITY, CANDELA.getFundamentalMeasurementType());
         assertEquals(UNIT_LESS_NUMBER, EACH.getFundamentalMeasurementType());
+    }
+
+
+    @Test
+    void getMeasurementSystemTest() {
+        assertEquals(SYSTEM_INTERNATIONAL, METER.getMeasurementSystem());
+        assertEquals(SYSTEM_INTERNATIONAL, GRAM.getMeasurementSystem());
+        assertEquals(SYSTEM_INTERNATIONAL, SECOND.getMeasurementSystem());
+        assertEquals(SYSTEM_INTERNATIONAL, AMPERE.getMeasurementSystem());
+        assertEquals(SYSTEM_INTERNATIONAL, KELVIN.getMeasurementSystem());
+        assertEquals(SYSTEM_INTERNATIONAL, MOLE.getMeasurementSystem());
+        assertEquals(SYSTEM_INTERNATIONAL, CANDELA.getMeasurementSystem());
+        assertEquals(SYSTEM_INTERNATIONAL, EACH.getMeasurementSystem());
+
+        assertEquals(IMPERIAL, FOOT.getMeasurementSystem());
+        assertEquals(IMPERIAL, SLUG.getMeasurementSystem());
+        assertEquals(IMPERIAL, RANKINE.getMeasurementSystem());
+
     }
 }
