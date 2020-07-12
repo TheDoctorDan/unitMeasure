@@ -21,6 +21,8 @@ import static com.carpe_cosmos.unit_measure.constants.UnitMeasureDerivedType.WAT
 import static com.carpe_cosmos.unit_measure.constants.UnitPrefix.KILO;
 import static com.carpe_cosmos.unit_measure.constants.UnitPrefix.UNO;
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -45,39 +47,39 @@ class UnitMeasureDerivedTypeTest {
                 SimpleUnitMeasurement.builder().unitPrefix(KILO).unitMeasureType(GRAM).build(),
                 SimpleUnitMeasurement.builder().unitMeasureType(METER).build()
         );
-        assertEquals(NEWTON.getNumeratorSimpleUnitMeasurementList(), expected);
+        assertArrayEquals(expected.toArray(), NEWTON.getNumeratorSimpleUnitMeasurementList().toArray());
 
         expected = asList(
                 SimpleUnitMeasurement.builder().unitMeasureType(NEWTON).build(),
                 SimpleUnitMeasurement.builder().unitMeasureType(METER).build()
         );
-        assertEquals(JOULE.getNumeratorSimpleUnitMeasurementList(), expected);
+        assertArrayEquals(expected.toArray(), JOULE.getNumeratorSimpleUnitMeasurementList().toArray());
 
         expected = asList(
                 SimpleUnitMeasurement.builder().unitMeasureType(JOULE).build(),
                 SimpleUnitMeasurement.builder().unitMeasureType(METER).build()
         );
-        assertEquals(WATT.getNumeratorSimpleUnitMeasurementList(), expected);
+        assertArrayEquals(expected.toArray(), WATT.getNumeratorSimpleUnitMeasurementList().toArray());
 
-        expected = Collections.singletonList(
+        expected = singletonList(
                 SimpleUnitMeasurement.builder().unitMeasureType(NEWTON).build()
         );
-        assertEquals(PASCAL.getNumeratorSimpleUnitMeasurementList(), expected);
+        assertArrayEquals(expected.toArray(), PASCAL.getNumeratorSimpleUnitMeasurementList().toArray());
 
-        expected = Collections.singletonList(
+        expected = singletonList(
                 SimpleUnitMeasurement.builder().unitMeasureType(WATT).build()
         );
-        assertEquals(VOLT.getNumeratorSimpleUnitMeasurementList(), expected);
+        assertArrayEquals(expected.toArray(), VOLT.getNumeratorSimpleUnitMeasurementList().toArray());
 
-        expected = Collections.singletonList(
+        expected = singletonList(
                 SimpleUnitMeasurement.builder().unitMeasureType(VOLT).build()
         );
-        assertEquals(OHM.getNumeratorSimpleUnitMeasurementList(), expected);
+        assertArrayEquals(expected.toArray(), OHM.getNumeratorSimpleUnitMeasurementList().toArray());
 
-        expected = Collections.singletonList(
+        expected = singletonList(
                 SimpleUnitMeasurement.builder().unitMeasureType(METER).build()
         );
-        assertEquals(RADIAN.getNumeratorSimpleUnitMeasurementList(), expected);
+        assertArrayEquals(expected.toArray(), RADIAN.getNumeratorSimpleUnitMeasurementList().toArray());
 
     }
 
@@ -88,72 +90,72 @@ class UnitMeasureDerivedTypeTest {
                 SimpleUnitMeasurement.builder().unitMeasureType(SECOND).build(),
                 SimpleUnitMeasurement.builder().unitMeasureType(SECOND).build()
         );
-        assertEquals(NEWTON.getDenominatorSimpleUnitMeasurementList(), expected);
+        assertArrayEquals(expected.toArray(), NEWTON.getDenominatorSimpleUnitMeasurementList().toArray());
 
         expected = Collections.emptyList();
-        assertEquals(JOULE.getDenominatorSimpleUnitMeasurementList(), expected);
+        assertArrayEquals(expected.toArray(), JOULE.getDenominatorSimpleUnitMeasurementList().toArray());
 
-        expected = Collections.singletonList(
+        expected = singletonList(
                 SimpleUnitMeasurement.builder().unitMeasureType(SECOND).build()
         );
-        assertEquals(WATT.getDenominatorSimpleUnitMeasurementList(), expected);
+        assertArrayEquals(expected.toArray(), WATT.getDenominatorSimpleUnitMeasurementList().toArray());
 
         expected = asList(
                 SimpleUnitMeasurement.builder().unitMeasureType(METER).build(),
                 SimpleUnitMeasurement.builder().unitMeasureType(METER).build()
         );
-        assertEquals(PASCAL.getDenominatorSimpleUnitMeasurementList(), expected);
+        assertArrayEquals(expected.toArray(), PASCAL.getDenominatorSimpleUnitMeasurementList().toArray());
 
-        expected = Collections.singletonList(
+        expected = singletonList(
                 SimpleUnitMeasurement.builder().unitMeasureType(AMPERE).build()
         );
-        assertEquals(VOLT.getDenominatorSimpleUnitMeasurementList(), expected);
+        assertArrayEquals(expected.toArray(), VOLT.getDenominatorSimpleUnitMeasurementList().toArray());
 
-        expected = Collections.singletonList(
+        expected = singletonList(
                 SimpleUnitMeasurement.builder().unitMeasureType(AMPERE).build()
         );
-        assertEquals(OHM.getDenominatorSimpleUnitMeasurementList(), expected);
+        assertArrayEquals(expected.toArray(), OHM.getDenominatorSimpleUnitMeasurementList().toArray());
 
-        expected = Collections.singletonList(
+        expected = singletonList(
                 SimpleUnitMeasurement.builder().unitMeasureType(METER).build()
         );
-        assertEquals(RADIAN.getDenominatorSimpleUnitMeasurementList(), expected);
+        assertArrayEquals(expected.toArray(), RADIAN.getDenominatorSimpleUnitMeasurementList().toArray());
 
     }
 
     @Test
     void getDefaultUnitPrefixTest() {
-        assertEquals(NEWTON.getDefaultUnitPrefix(), UNO);
-        assertEquals(JOULE.getDefaultUnitPrefix(), UNO);
-        assertEquals(WATT.getDefaultUnitPrefix(), UNO);
-        assertEquals(PASCAL.getDefaultUnitPrefix(), UNO);
-        assertEquals(VOLT.getDefaultUnitPrefix(), UNO);
-        assertEquals(OHM.getDefaultUnitPrefix(), UNO);
-        assertEquals(RADIAN.getDefaultUnitPrefix(), UNO);
+        assertEquals(UNO, NEWTON.getDefaultUnitPrefix());
+        assertEquals(UNO, JOULE.getDefaultUnitPrefix());
+        assertEquals(UNO, WATT.getDefaultUnitPrefix());
+        assertEquals(UNO, PASCAL.getDefaultUnitPrefix());
+        assertEquals(UNO, VOLT.getDefaultUnitPrefix());
+        assertEquals(UNO, OHM.getDefaultUnitPrefix());
+        assertEquals(UNO, RADIAN.getDefaultUnitPrefix());
 
     }
 
     @Test
     void getSymbolTest() {
-        assertEquals(NEWTON.getSymbol(), "n");
-        assertEquals(JOULE.getSymbol(), "J");
-        assertEquals(WATT.getSymbol(), "W");
-        assertEquals(PASCAL.getSymbol(), "Pa");
-        assertEquals(VOLT.getSymbol(), "V");
-        assertEquals(OHM.getSymbol(), "\u03A9");
-        assertEquals(RADIAN.getSymbol(), "rad");
+        assertEquals("n", NEWTON.getSymbol());
+        assertEquals("J", JOULE.getSymbol());
+        assertEquals("W", WATT.getSymbol());
+        assertEquals("Pa", PASCAL.getSymbol());
+        assertEquals("V", VOLT.getSymbol());
+        assertEquals("\u03A9", OHM.getSymbol());
+        assertEquals("rad", RADIAN.getSymbol());
 
     }
 
     @Test
     void getMeasurementSystemTest() {
-        assertEquals(NEWTON.getMeasurementSystem(), SYSTEM_INTERNATIONAL);
-        assertEquals(JOULE.getMeasurementSystem(), SYSTEM_INTERNATIONAL);
-        assertEquals(WATT.getMeasurementSystem(), SYSTEM_INTERNATIONAL);
-        assertEquals(PASCAL.getMeasurementSystem(), SYSTEM_INTERNATIONAL);
-        assertEquals(VOLT.getMeasurementSystem(), SYSTEM_INTERNATIONAL);
-        assertEquals(OHM.getMeasurementSystem(), SYSTEM_INTERNATIONAL);
-        assertEquals(RADIAN.getMeasurementSystem(), SYSTEM_INTERNATIONAL);
+        assertEquals(SYSTEM_INTERNATIONAL, NEWTON.getMeasurementSystem());
+        assertEquals(SYSTEM_INTERNATIONAL, JOULE.getMeasurementSystem());
+        assertEquals(SYSTEM_INTERNATIONAL, WATT.getMeasurementSystem());
+        assertEquals(SYSTEM_INTERNATIONAL, PASCAL.getMeasurementSystem());
+        assertEquals(SYSTEM_INTERNATIONAL, VOLT.getMeasurementSystem());
+        assertEquals(SYSTEM_INTERNATIONAL, OHM.getMeasurementSystem());
+        assertEquals(SYSTEM_INTERNATIONAL, RADIAN.getMeasurementSystem());
 
     }
 }
