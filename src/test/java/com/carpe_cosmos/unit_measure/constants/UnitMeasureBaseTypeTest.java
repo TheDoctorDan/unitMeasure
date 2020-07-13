@@ -3,6 +3,8 @@ package com.carpe_cosmos.unit_measure.constants;
 import com.carpe_cosmos.unit_measure.domain.SimpleUnitMeasurement;
 import com.carpe_cosmos.unit_measure.exceptions.UnitMeasureException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.Collections;
 
@@ -33,61 +35,28 @@ import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 public class UnitMeasureBaseTypeTest {
 
 
-    @Test
-    public void isBaseUnitDimensionTest() {
-        assertTrue(METER.isBaseUnitDimension());
-        assertTrue(GRAM.isBaseUnitDimension());
-        assertTrue(SECOND.isBaseUnitDimension());
-        assertTrue(AMPERE.isBaseUnitDimension());
-        assertTrue(KELVIN.isBaseUnitDimension());
-        assertTrue(MOLE.isBaseUnitDimension());
-        assertTrue(CANDELA.isBaseUnitDimension());
-        assertTrue(EACH.isBaseUnitDimension());
+    void isBaseUnitDimensionTest(UnitMeasureBaseType unitMeasureBaseType, boolean expected) {
+        assertEquals(expected, unitMeasureBaseType.isBaseUnitDimension());
     }
 
-    @Test
-    public void findBySymbolTestNormalSet() throws Exception {
-        assertEquals(METER, findBySymbol(UnitMeasureBaseType.class, "m"));
-        assertEquals(GRAM, findBySymbol(UnitMeasureBaseType.class, "g"));
-        assertEquals(SECOND, findBySymbol(UnitMeasureBaseType.class, "s"));
-        assertEquals(AMPERE, findBySymbol(UnitMeasureBaseType.class, "A"));
-        assertEquals(KELVIN, findBySymbol(UnitMeasureBaseType.class, "K"));
-        assertEquals(MOLE, findBySymbol(UnitMeasureBaseType.class, "mole"));
-        assertEquals(CANDELA, findBySymbol(UnitMeasureBaseType.class, "cd"));
-        assertEquals(EACH, findBySymbol(UnitMeasureBaseType.class, "ea"));
+    void findBySymbolTestNormalSet(UnitMeasureBaseType expected, String symbol) throws Exception {
+        assertEquals(expected, findBySymbol(UnitMeasureBaseType.class, symbol));
     }
 
-    @Test
-    public void findBySymbolTestFailure() {
-        Throwable thrown = assertThrows(UnitMeasureException.class, () ->
-                findBySymbol(UnitMeasureBaseType.class, "z"));
-        assertEquals("No UnitMeasureBaseType Enum with symbol of z.", thrown.getMessage());
+    void findByFundamentalMeasurementTypeTestNormalSet(
+            UnitMeasureBaseType expected,
+            FundamentalMeasurementType fundamentalMeasurementType,
+            MeasurementSystem measurementSystem
+    ) throws Exception {
+        assertEquals(expected, findByFundamentalMeasurementType(fundamentalMeasurementType, measurementSystem));
     }
 
-    @Test
-    public void findByFundamentalMeasurementTypeTestNormalSet() throws Exception {
-        assertEquals(METER, findByFundamentalMeasurementType(LENGTH));
-        assertEquals(GRAM, findByFundamentalMeasurementType(MASS));
-        assertEquals(SECOND, findByFundamentalMeasurementType(TIME));
-        assertEquals(AMPERE, findByFundamentalMeasurementType(ELECTRICAL_CURRENT));
-        assertEquals(KELVIN, findByFundamentalMeasurementType(TEMPERATURE));
-        assertEquals(MOLE, findByFundamentalMeasurementType(AMOUNT_OF_SUBSTANCE));
-        assertEquals(CANDELA, findByFundamentalMeasurementType(LUMINOUS_INTENSITY));
-        assertEquals(EACH, findByFundamentalMeasurementType(UNIT_LESS_NUMBER));
-    }
-
-    @Test
-    public void findByFundamentalMeasurementTypeTestFailure() {
-        Throwable thrown = assertThrows(UnitMeasureException.class, () ->
-                findByFundamentalMeasurementType(null));
-        assertEquals("No UnitMeasureBaseType Enum with fundamentalMeasurementType of null.", thrown.getMessage());
-    }
 
     @Test
     public void getNumeratorDimensionList() {
@@ -131,6 +100,22 @@ public class UnitMeasureBaseTypeTest {
                         .unitMeasureType(EACH).build()).toArray(),
                 EACH.getNumeratorSimpleUnitMeasurementList().toArray());
 
+
+        assertArrayEquals(
+                singletonList(SimpleUnitMeasurement.builder()
+                        .unitMeasureType(FOOT).build()).toArray(),
+                FOOT.getNumeratorSimpleUnitMeasurementList().toArray());
+
+        assertArrayEquals(
+                singletonList(SimpleUnitMeasurement.builder()
+                        .unitMeasureType(SLUG).build()).toArray(),
+                SLUG.getNumeratorSimpleUnitMeasurementList().toArray());
+
+        assertArrayEquals(
+                singletonList(SimpleUnitMeasurement.builder()
+                        .unitMeasureType(RANKINE).build()).toArray(),
+                RANKINE.getNumeratorSimpleUnitMeasurementList().toArray());
+
     }
 
     @Test
@@ -154,6 +139,11 @@ public class UnitMeasureBaseTypeTest {
         assertEquals(UnitPrefix.UNO, MOLE.getDefaultUnitPrefix());
         assertEquals(UnitPrefix.UNO, CANDELA.getDefaultUnitPrefix());
         assertEquals(UnitPrefix.UNO, EACH.getDefaultUnitPrefix());
+
+        assertEquals(UnitPrefix.UNO, FOOT.getDefaultUnitPrefix());
+        assertEquals(UnitPrefix.UNO, SLUG.getDefaultUnitPrefix());
+        assertEquals(UnitPrefix.UNO, RANKINE.getDefaultUnitPrefix());
+
     }
 
     @Test
@@ -166,6 +156,11 @@ public class UnitMeasureBaseTypeTest {
         assertEquals(AMOUNT_OF_SUBSTANCE, MOLE.getFundamentalMeasurementType());
         assertEquals(LUMINOUS_INTENSITY, CANDELA.getFundamentalMeasurementType());
         assertEquals(UNIT_LESS_NUMBER, EACH.getFundamentalMeasurementType());
+
+        assertEquals(LENGTH, FOOT.getFundamentalMeasurementType());
+        assertEquals(MASS, SLUG.getFundamentalMeasurementType());
+        assertEquals(TEMPERATURE, RANKINE.getFundamentalMeasurementType());
+
     }
 
 
@@ -185,4 +180,102 @@ public class UnitMeasureBaseTypeTest {
         assertEquals(IMPERIAL, RANKINE.getMeasurementSystem());
 
     }
+
+
+    @ParameterizedTest
+    @EnumSource(UnitMeasureBaseType.class)
+    public void haveAllEnums(UnitMeasureBaseType unitMeasureBaseType) throws Exception {
+
+        String symbol;
+        FundamentalMeasurementType fundamentalMeasurementType;
+        MeasurementSystem measurementSystem;
+        switch (unitMeasureBaseType) {
+            case METER:
+                symbol = "m";
+                fundamentalMeasurementType = LENGTH;
+                measurementSystem = SYSTEM_INTERNATIONAL;
+                break;
+            case GRAM:
+                symbol = "g";
+                fundamentalMeasurementType = MASS;
+                measurementSystem = SYSTEM_INTERNATIONAL;
+                break;
+            case SECOND:
+                symbol = "s";
+                fundamentalMeasurementType = TIME;
+                measurementSystem = SYSTEM_INTERNATIONAL;
+                break;
+            case AMPERE:
+                symbol = "A";
+                fundamentalMeasurementType = ELECTRICAL_CURRENT;
+                measurementSystem = SYSTEM_INTERNATIONAL;
+                break;
+            case KELVIN:
+                symbol = "K";
+                fundamentalMeasurementType = TEMPERATURE;
+                measurementSystem = SYSTEM_INTERNATIONAL;
+                break;
+            case MOLE:
+                symbol = "mole";
+                fundamentalMeasurementType = AMOUNT_OF_SUBSTANCE;
+                measurementSystem = SYSTEM_INTERNATIONAL;
+                break;
+            case CANDELA:
+                symbol = "cd";
+                fundamentalMeasurementType = LUMINOUS_INTENSITY;
+                measurementSystem = SYSTEM_INTERNATIONAL;
+                break;
+            case EACH:
+                symbol = "ea";
+                fundamentalMeasurementType = UNIT_LESS_NUMBER;
+                measurementSystem = SYSTEM_INTERNATIONAL;
+                break;
+
+            case FOOT:
+                symbol = "ft";
+                fundamentalMeasurementType = LENGTH;
+                measurementSystem = IMPERIAL;
+                break;
+            case SLUG:
+                symbol = "slug";
+                fundamentalMeasurementType = MASS;
+                measurementSystem = IMPERIAL;
+                break;
+            case RANKINE:
+                symbol = "R";
+                fundamentalMeasurementType = TEMPERATURE;
+                measurementSystem = IMPERIAL;
+                break;
+
+            default:
+                fail("unitMeasureBaseType :" + unitMeasureBaseType + ": is missing from these test!");
+                symbol = "";
+                fundamentalMeasurementType = null;
+                measurementSystem = null;
+        }
+
+
+        isBaseUnitDimensionTest(unitMeasureBaseType, true);
+        findBySymbolTestNormalSet(unitMeasureBaseType, symbol);
+        findByFundamentalMeasurementTypeTestNormalSet(unitMeasureBaseType, fundamentalMeasurementType, measurementSystem);
+
+    }
+
+
+    @Test
+    public void findBySymbolTestFailure() {
+        Throwable thrown = assertThrows(UnitMeasureException.class, () ->
+                findBySymbol(UnitMeasureBaseType.class, "z"));
+        assertEquals("No UnitMeasureBaseType Enum with symbol of z.", thrown.getMessage());
+    }
+
+    @Test
+    public void findByFundamentalMeasurementTypeTestFailure() {
+        Throwable thrown = assertThrows(UnitMeasureException.class, () ->
+                findByFundamentalMeasurementType(null, null));
+        assertEquals("No UnitMeasureBaseType Enum with fundamentalMeasurementType of null.", thrown.getMessage());
+    }
+
 }
+
+
